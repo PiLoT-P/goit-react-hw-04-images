@@ -1,4 +1,4 @@
-import { Component, useState } from "react";
+import {useState } from "react";
 
 import PhotoPage from "./PhotoPage/PhotoPage";
 import Searchbar from "./Searchbar/Searchbar";
