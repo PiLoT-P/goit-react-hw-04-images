@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import {useCallback, useEffect, useState } from "react";
 import { getDataServer } from '../../server/server.js';
 
 import ImageGallery from "components/ImageGallery/ImageGallery.jsx";
@@ -22,7 +22,7 @@ const PhotoPage = ({queryText}) => {
         setQuery(queryText);
     }
 
-    const setPhotos = async () => {
+    const setPhotos = useCallback(async () => {
         setIsLoading(true);
         setError(null);
 
@@ -33,13 +33,13 @@ const PhotoPage = ({queryText}) => {
             } else {
                 setDisabledButton(false);
             }
-            setGallery((prev)=> page === 1 ? data.hits : [...prev, ...data.hits])
+            setGallery((prev) => page === 1 ? data.hits : [...prev, ...data.hits])
         } catch (error) {
             setError(error.message)
         } finally {
             setIsLoading(false);
         }
-    }
+    }, [page, query]);
     
     const changePage = () => {
         setPage((prev) => prev + 1);
@@ -59,8 +59,8 @@ const PhotoPage = ({queryText}) => {
             (page !== 1)
         ) {
             setPhotos();
-        }
-    }, [page, query]);
+        } 
+    }, [page, query, setPhotos]);
 
     return (
         <>

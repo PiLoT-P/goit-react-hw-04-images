@@ -10,11 +10,11 @@ const modalRoot = document.querySelector("#root");
 const Modal = ({url, closeModal}) =>{
     useEffect(() => {
         window.addEventListener("keydown", closeEscape);
-    }, []);
+    });
 
     useEffect(() => {
         return () => {window.removeEventListener("keydown", closeEscape); };
-    }, []);
+    });
 
     const closeEscape = (event) => {
         if (event.code === 'Escape') {
